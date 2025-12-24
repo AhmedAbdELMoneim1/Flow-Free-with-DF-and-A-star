@@ -144,10 +144,11 @@ if st.session_state["board_size"] is not None:
                     st.session_state["solution"] = FlowFree(current_board)
                     st.session_state["solution"].start_the_game()
                     st.session_state["solving_mode"] = True
-                    st.rerun()
                 except:
                     st.session_state["solution"] = None
                     st.error("Incorrect Board")
+                finally:
+                    st.rerun()
             else:
                 inputs_col.warning("Fill All Colors Correct First", width="stretch")
 
