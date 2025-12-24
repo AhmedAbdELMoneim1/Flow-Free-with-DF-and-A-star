@@ -5,6 +5,11 @@ import streamlit as st
 from DF_A_Star import FlowFree
 from configurations import flow_colors_hex, flow_colors, game_boards_examples, setting
 
+#
+#  code still need some optimizations but work THX
+#
+
+
 st.set_page_config(layout="wide")
 
 
@@ -135,11 +140,14 @@ if st.session_state["board_size"] is not None:
         if inputs_col.button("Test If Can Solve It", width="stretch", shortcut="Enter", key="solving_mode_button"):
             count_colors = (current_board > 0).sum()
             if count_colors == colors_number * 2:
-                st.session_state["solving_mode"] = True
-                st.session_state["solution"] = FlowFree(current_board)
-                st.session_state["solution"].start_the_game()
-
-                st.rerun()
+                try:
+                    st.session_state["solution"] = FlowFree(current_board)
+                    st.session_state["solution"].start_the_game()
+                    st.session_state["solving_mode"] = True
+                    st.rerun()
+                except:
+                    st.session_state["solution"] = None
+                    st.error("Incorrect Board")
             else:
                 inputs_col.warning("Fill All Colors Correct First", width="stretch")
 
@@ -150,7 +158,7 @@ if st.session_state["board_size"] is not None:
         elif result_id == 1:
             inputs_col.error("Can't Solve More Steps Than 200K", width="stretch")
         else:
-            inputs_col.error("Incorrect Board Mode", width="stretch")
+            inputs_col.error("Incorrect Board", width="stretch")
 
         states_length = len(st.session_state["solution"].states) - 1
 
