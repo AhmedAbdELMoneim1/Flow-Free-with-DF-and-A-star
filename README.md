@@ -6,6 +6,10 @@ An intelligent AI solver for the popular Flow Free puzzle game, implementing bot
 
 Flow Free is a puzzle game where you connect matching colored dots on a grid. The challenge is to connect all pairs while filling every square on the board, with paths not allowed to cross or overlap.
 
+<p align="center">
+  <img src="8_8_A.gif" alt="Flow Free Solver Demo" width="400">
+</p>
+
 ## 🧠 Problem Formulation
 
 - **State**: The entire board configuration
